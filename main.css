@@ -558,4 +558,46 @@ footer {
   .recipe-img {
     max-width: 90vw;
   }
+}
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  background: #fffbe6;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px 0 rgba(185,127,160,0.06);
+  padding: 1rem 1.2rem;
+  margin-bottom: 2rem;
+}
+.filter-bar label {
+  font-weight: 600;
+  color: var(--primary);
+  margin-right: 0.3rem;
+}
+.filter-bar select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.4em 1em;
+  border-radius: 8px;
+  border: 1px solid #e0d6e0;
+  background: #fff;
+  color: var(--text);
+  margin-right: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.filter-bar select:focus {
+  border: 1.5px solid var(--primary);
+}
+@media (max-width: 600px) {
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7rem;
+    padding: 0.7rem 0.5rem;
+  }
+  .filter-bar label, .filter-bar select {
+    margin-right: 0;
+  }
 } 

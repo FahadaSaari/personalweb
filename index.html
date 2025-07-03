@@ -18,6 +18,19 @@
   </section>
   <section class="featured-recipes" id="featured-recipes">
     <h2>Featured Recipes</h2>
+    <div class="filter-bar">
+      <label for="time-filter">Time:</label>
+      <select id="time-filter">
+        <option value="all">All</option>
+        <option value="lt30">&lt; 30 min</option>
+        <option value="30to60">30-60 min</option>
+        <option value="gt60">&gt; 60 min</option>
+      </select>
+      <label for="ingredient-filter">Ingredient:</label>
+      <select id="ingredient-filter">
+        <option value="all">All</option>
+      </select>
+    </div>
     <div id="recipes-list">Loading recipes...</div>
   </section>
   <footer>
@@ -26,28 +39,82 @@
   <script src="main.js"></script>
   <script>
     // Fetch a few sample recipes from TheMealDB public API
+    let allMeals = [];
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=c')
       .then(response => response.json())
       .then(data => {
-        const list = document.getElementById('recipes-list');
         if (!data.meals || data.meals.length === 0) {
-          list.textContent = 'No recipes available.';
+          document.getElementById('recipes-list').textContent = 'No recipes available.';
           return;
         }
-        list.innerHTML = data.meals.slice(0, 6).map(meal => `
-          <div class="recipe-card">
-            <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="recipe-img" />
-            <div class="recipe-info">
-              <div class="recipe-name">${meal.strMeal}</div>
-              <div class="recipe-cuisine">${meal.strArea}</div>
-              <a href="${meal.strSource || meal.strYoutube}" target="_blank" class="view-recipe-btn">View Recipe</a>
-            </div>
-          </div>
-        `).join('');
+        allMeals = data.meals;
+        populateIngredientFilter(allMeals);
+        renderRecipes();
       })
       .catch(() => {
         document.getElementById('recipes-list').textContent = 'Failed to load recipes.';
       });
+
+    function getTimeCategory(meal) {
+      // TheMealDB does not provide time, so we'll randomize for demo
+      // In a real app, use actual prep/cook time from your data
+      const random = meal.idMeal.charCodeAt(0) % 3;
+      if (random === 0) return 'lt30';
+      if (random === 1) return '30to60';
+      return 'gt60';
+    }
+
+    function populateIngredientFilter(meals) {
+      const ingredientSet = new Set();
+      meals.forEach(meal => {
+        for (let i = 1; i <= 20; i++) {
+          const ing = meal[`strIngredient${i}`];
+          if (ing && ing.trim()) ingredientSet.add(ing.trim());
+        }
+      });
+      const ingredientFilter = document.getElementById('ingredient-filter');
+      ingredientSet.forEach(ing => {
+        const opt = document.createElement('option');
+        opt.value = ing;
+        opt.textContent = ing;
+        ingredientFilter.appendChild(opt);
+      });
+    }
+
+    function renderRecipes() {
+      const timeVal = document.getElementById('time-filter').value;
+      const ingVal = document.getElementById('ingredient-filter').value;
+      const list = document.getElementById('recipes-list');
+      let filtered = allMeals;
+      if (timeVal !== 'all') {
+        filtered = filtered.filter(meal => getTimeCategory(meal) === timeVal);
+      }
+      if (ingVal !== 'all') {
+        filtered = filtered.filter(meal => {
+          for (let i = 1; i <= 20; i++) {
+            if (meal[`strIngredient${i}`] && meal[`strIngredient${i}`].toLowerCase() === ingVal.toLowerCase()) return true;
+          }
+          return false;
+        });
+      }
+      if (!filtered.length) {
+        list.textContent = 'No recipes match your filter.';
+        return;
+      }
+      list.innerHTML = filtered.slice(0, 12).map(meal => `
+        <div class="recipe-card">
+          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="recipe-img" />
+          <div class="recipe-info">
+            <div class="recipe-name">${meal.strMeal}</div>
+            <div class="recipe-cuisine">${meal.strArea}</div>
+            <a href="${meal.strSource || meal.strYoutube}" target="_blank" class="view-recipe-btn">View Recipe</a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('time-filter').addEventListener('change', renderRecipes);
+    document.getElementById('ingredient-filter').addEventListener('change', renderRecipes);
   </script>
 </body>
 </html> 
