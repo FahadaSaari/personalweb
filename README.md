@@ -1,42 +1,44 @@
-# AI Classes Landing Page
+# World Recipes Website
 
 ## Overview
-This project is a modern, minimal, and professional landing page for promoting AI adaptation skills and classes. It is designed to be clean, scalable, and easy to customize for personal or business branding. The page is built with HTML, CSS, and JavaScript, and is fully responsive for all devices.
+This project is a modern, professional website for exploring a variety of recipes from around the world. It features a homepage with highlighted recipes, subpages for About, Cuisine Types, and individual recipe details. The site is built with HTML, CSS, and JavaScript, and is fully responsive for all devices.
 
 ## Features
-- Professional hero section with a business-focused illustration
-- Clear call-to-action for AI class registration
-- About section describing the mission and offering
-- Contact form for inquiries
-- Animated SVG wave background for visual depth
+- Homepage with a selection of global recipes
+- Subpages for About, Cuisine Types, and Recipe Details
+- Search and filter recipes by cuisine or ingredient
+- Add new recipes (demo input form)
 - Responsive and accessible design
 - Easy to customize and extend
 
 ## File Structure
 ```
 Class AI/
-├── testing.html      # Main HTML file for the landing page
-├── main.css          # All styles for layout, animation, and responsiveness
-├── main.js           # JavaScript for interactivity (modal, nav, hero effects)
-└── README.md         # This documentation file
+├── index.html         # Main homepage for recipes
+├── about.html         # About the website/author
+├── cuisines.html      # List and filter by cuisine types
+├── recipe.html        # Template for individual recipe details
+├── main.css           # All styles for layout, animation, and responsiveness
+├── main.js            # JavaScript for interactivity (modal, nav, recipe logic)
+├── recipes.json       # JSON file with sample recipes
+└── README.md          # This documentation file
 ```
 
 ## Customization
-- **Hero Image:** Replace the `src` in the `<img class="hero-image">` tag in `testing.html` with your own illustration or photo.
-- **Colors & Fonts:** Edit `main.css` to change the color palette or font family to match your brand.
-- **Content:** Update the text in `testing.html` to reflect your own story, mission, and offerings.
-- **Contact Form:** The form is currently a front-end only demo. Integrate with a backend or service (like Formspree) for real submissions.
-- **Add Sections:** You can add testimonials, FAQ, or more services by extending the HTML and CSS.
+- **Add Recipes:** Edit `recipes.json` to add or update recipes. Each recipe includes a name, cuisine, ingredients, steps, and image URL.
+- **Content:** Update the HTML files to reflect your own story, favorite cuisines, or featured recipes.
+- **Styling:** Edit `main.css` to change the color palette or font family to match your brand.
+- **Functionality:** Extend `main.js` to add more interactivity, such as advanced search or user ratings.
 
 ## Deployment
-You can deploy this landing page on any static hosting service (e.g., GitHub Pages, Netlify, Vercel):
-1. Upload all files (`testing.html`, `main.css`, `main.js`, and any assets) to your host.
-2. Set `testing.html` as the main entry point (rename to `index.html` if needed).
+You can deploy this website on any static hosting service (e.g., GitHub Pages, Netlify, Vercel):
+1. Upload all files (`index.html`, `about.html`, `cuisines.html`, `recipe.html`, `main.css`, `main.js`, `recipes.json`, and any assets) to your host.
+2. Set `index.html` as the main entry point.
 3. Share your link!
 
 ## Credits
-- Hero illustration from [unDraw](https://undraw.co/)
-- Icons from [Twemoji](https://twemoji.twitter.com/)
+- Recipe images from [Unsplash](https://unsplash.com/) or [Pexels](https://pexels.com/)
+- Recipe data from public/free recipe sources
 
 ---
-For questions or customization help, contact Adda or your web developer. 
+For questions or customization help, contact the site maintainer or your web developer. 

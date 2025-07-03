@@ -8,6 +8,16 @@ function openModal(service) {
 function closeModal() {
   document.getElementById('modalBg').classList.remove('active');
 }
+// Allow closing modal by clicking outside the modal or pressing Escape
+const modalBg = document.getElementById('modalBg');
+if (modalBg) {
+  modalBg.addEventListener('click', function(e) {
+    if (e.target === modalBg) closeModal();
+  });
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
 // Nav active state on scroll
 const navLinks = document.querySelectorAll('nav a');
 const sections = ['about','services','contact'];
@@ -53,4 +63,72 @@ if (iconsContainer) {
     icon.style.animationDelay = (Math.random() * 4) + 's';
     iconsContainer.appendChild(icon);
   }
-} 
+}
+// Recipe modal logic for World Recipes site
+function showRecipeModal(recipe) {
+  let modal = document.getElementById('recipeModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'recipeModal';
+    modal.className = 'modal-bg active';
+    modal.innerHTML = `
+      <div class="modal recipe-modal">
+        <button class="close-btn" onclick="closeRecipeModal()">&times;</button>
+        <h3 id="modalRecipeTitle"></h3>
+        <img id="modalRecipeImg" class="recipe-modal-img" src="" alt="Recipe Image" />
+        <div class="recipe-modal-cuisine"></div>
+        <div class="recipe-modal-ingredients"></div>
+        <div class="recipe-modal-steps"></div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  } else {
+    modal.classList.add('active');
+  }
+  document.getElementById('modalRecipeTitle').textContent = recipe.name;
+  document.getElementById('modalRecipeImg').src = recipe.image;
+  document.getElementById('modalRecipeImg').alt = recipe.name;
+  document.querySelector('.recipe-modal-cuisine').textContent = `Cuisine: ${recipe.cuisine}`;
+  document.querySelector('.recipe-modal-ingredients').innerHTML = '<b>Ingredients:</b><ul>' + recipe.ingredients.map(i => `<li>${i}</li>`).join('') + '</ul>';
+  document.querySelector('.recipe-modal-steps').innerHTML = '<b>Steps:</b><ol>' + recipe.steps.map(s => `<li>${s}</li>`).join('') + '</ol>';
+}
+function closeRecipeModal() {
+  const modal = document.getElementById('recipeModal');
+  if (modal) modal.classList.remove('active');
+}
+// Attach event listeners to recipe cards if on homepage
+window.addEventListener('DOMContentLoaded', () => {
+  const list = document.getElementById('recipes-list');
+  if (list) {
+    fetch('recipes.json')
+      .then(response => response.json())
+      .then(data => {
+        list.innerHTML = data.map((recipe, idx) => `
+          <div class="recipe-card">
+            <img src="${recipe.image}" alt="${recipe.name}" class="recipe-img" />
+            <div class="recipe-info">
+              <div class="recipe-name">${recipe.name}</div>
+              <div class="recipe-cuisine">${recipe.cuisine}</div>
+              <button class="view-recipe-btn" data-idx="${idx}">View Recipe</button>
+            </div>
+          </div>
+        `).join('');
+        // Add click listeners
+        list.querySelectorAll('.view-recipe-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const idx = this.getAttribute('data-idx');
+            showRecipeModal(data[idx]);
+          });
+        });
+      });
+  }
+});
+// Allow closing recipe modal by clicking outside or pressing Escape
+window.addEventListener('click', function(e) {
+  const modal = document.getElementById('recipeModal');
+  if (modal && modal.classList.contains('active') && e.target === modal) closeRecipeModal();
+});
+document.addEventListener('keydown', function(e) {
+  const modal = document.getElementById('recipeModal');
+  if (modal && modal.classList.contains('active') && e.key === 'Escape') closeRecipeModal();
+}); 

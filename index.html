@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Recipes | Explore Global Cuisine</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="cuisines.html">Cuisines</a>
+  </nav>
+  <section class="hero" id="home">
+    <h1>World Recipes</h1>
+    <div class="subtitle">Discover, cook, and enjoy recipes from every corner of the globe.</div>
+  </section>
+  <section class="featured-recipes" id="featured-recipes">
+    <h2>Featured Recipes</h2>
+    <div id="recipes-list">Loading recipes...</div>
+  </section>
+  <footer>
+    <div>© 2024 World Recipes. All rights reserved.</div>
+  </footer>
+  <script src="main.js"></script>
+  <script>
+    fetch('recipes.json')
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById('recipes-list');
+        if (!Array.isArray(data) || data.length === 0) {
+          list.textContent = 'No recipes available.';
+          return;
+        }
+        list.innerHTML = data.map(recipe => `
+          <div class="recipe-card">
+            <img src="${recipe.image}" alt="${recipe.name}" class="recipe-img" />
+            <div class="recipe-info">
+              <div class="recipe-name">${recipe.name}</div>
+              <div class="recipe-cuisine">${recipe.cuisine}</div>
+              <a href="#" class="view-recipe-btn">View Recipe</a>
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('recipes-list').textContent = 'Failed to load recipes.';
+      });
+  </script>
+</body>
+</html> 
