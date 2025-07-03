@@ -3,118 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>World Recipes | Explore Global Cuisine</title>
+  <title>Support Center | Home</title>
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <nav>
     <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="cuisines.html">Cuisines</a>
+    <a href="submit.html">Submit a Ticket</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="status.html">Ticket Status</a>
   </nav>
-  <section class="hero" id="home">
-    <h1>World Recipes</h1>
-    <div class="subtitle">Discover, cook, and enjoy recipes from every corner of the globe.</div>
-  </section>
-  <section class="featured-recipes" id="featured-recipes">
-    <h2>Featured Recipes</h2>
-    <div class="filter-bar">
-      <label for="time-filter">Time:</label>
-      <select id="time-filter">
-        <option value="all">All</option>
-        <option value="lt30">&lt; 30 min</option>
-        <option value="30to60">30-60 min</option>
-        <option value="gt60">&gt; 60 min</option>
-      </select>
-      <label for="ingredient-filter">Ingredient:</label>
-      <select id="ingredient-filter">
-        <option value="all">All</option>
-      </select>
+  <section class="hero" id="home-hero">
+    <h1>Welcome to the Support Center</h1>
+    <div class="subtitle">Your one-stop center for all support enquiries. How can we help you today?</div>
+    <div class="quick-links">
+      <a class="quick-link-btn" href="submit.html">Submit a Ticket</a>
+      <a class="quick-link-btn" href="faq.html">FAQ</a>
+      <a class="quick-link-btn" href="contact.html">Contact</a>
+      <a class="quick-link-btn" href="status.html">Ticket Status</a>
     </div>
-    <div id="recipes-list">Loading recipes...</div>
   </section>
   <footer>
-    <div>© 2024 World Recipes. All rights reserved.</div>
+    <div>© 2024 Support Center. All rights reserved.</div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="js/main.js"></script>
-  <script>
-    // Fetch a few sample recipes from TheMealDB public API
-    let allMeals = [];
-    fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=c')
-      .then(response => response.json())
-      .then(data => {
-        if (!data.meals || data.meals.length === 0) {
-          document.getElementById('recipes-list').textContent = 'No recipes available.';
-          return;
-        }
-        allMeals = data.meals;
-        populateIngredientFilter(allMeals);
-        renderRecipes();
-      })
-      .catch(() => {
-        document.getElementById('recipes-list').textContent = 'Failed to load recipes.';
-      });
-
-    function getTimeCategory(meal) {
-      // TheMealDB does not provide time, so we'll randomize for demo
-      // In a real app, use actual prep/cook time from your data
-      const random = meal.idMeal.charCodeAt(0) % 3;
-      if (random === 0) return 'lt30';
-      if (random === 1) return '30to60';
-      return 'gt60';
-    }
-
-    function populateIngredientFilter(meals) {
-      const ingredientSet = new Set();
-      meals.forEach(meal => {
-        for (let i = 1; i <= 20; i++) {
-          const ing = meal[`strIngredient${i}`];
-          if (ing && ing.trim()) ingredientSet.add(ing.trim());
-        }
-      });
-      const ingredientFilter = document.getElementById('ingredient-filter');
-      ingredientSet.forEach(ing => {
-        const opt = document.createElement('option');
-        opt.value = ing;
-        opt.textContent = ing;
-        ingredientFilter.appendChild(opt);
-      });
-    }
-
-    function renderRecipes() {
-      const timeVal = document.getElementById('time-filter').value;
-      const ingVal = document.getElementById('ingredient-filter').value;
-      const list = document.getElementById('recipes-list');
-      let filtered = allMeals;
-      if (timeVal !== 'all') {
-        filtered = filtered.filter(meal => getTimeCategory(meal) === timeVal);
-      }
-      if (ingVal !== 'all') {
-        filtered = filtered.filter(meal => {
-          for (let i = 1; i <= 20; i++) {
-            if (meal[`strIngredient${i}`] && meal[`strIngredient${i}`].toLowerCase() === ingVal.toLowerCase()) return true;
-          }
-          return false;
-        });
-      }
-      if (!filtered.length) {
-        list.textContent = 'No recipes match your filter.';
-        return;
-      }
-      list.innerHTML = filtered.slice(0, 12).map(meal => `
-        <div class="recipe-card">
-          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="recipe-img" />
-          <div class="recipe-info">
-            <div class="recipe-name">${meal.strMeal}</div>
-            <div class="recipe-cuisine">${meal.strArea}</div>
-            <a href="${meal.strSource || meal.strYoutube}" target="_blank" class="view-recipe-btn">View Recipe</a>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    document.getElementById('time-filter').addEventListener('change', renderRecipes);
-    document.getElementById('ingredient-filter').addEventListener('change', renderRecipes);
-  </script>
 </body>
 </html> 

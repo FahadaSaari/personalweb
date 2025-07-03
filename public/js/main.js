@@ -131,4 +131,13 @@ window.addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   const modal = document.getElementById('recipeModal');
   if (modal && modal.classList.contains('active') && e.key === 'Escape') closeRecipeModal();
-}); 
+});
+
+// Add Supabase client via CDN in HTML before this script
+const SUPABASE_URL = 'https://waduvfzgoaslskbnztie.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZHV2Znpnb2FzbHNrYm56dGllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0MjcxOTcsImV4cCI6MjA2NzAwMzE5N30.fBPaM2pNKnIo3KaOVgGiMhoYexs_i7ctVF2X2QGrk-c';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Export for use in other scripts if needed
+window.supabaseClient = supabase; 

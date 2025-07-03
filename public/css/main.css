@@ -602,4 +602,29 @@ footer {
   .filter-bar label, .filter-bar select {
     margin-right: 0;
   }
+}
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-top: 2.2rem;
+}
+.quick-link-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.9em 2.2em;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px 0 rgba(33,150,243,0.08);
+  transition: background 0.2s, transform 0.2s;
+  outline: none;
+  cursor: pointer;
+}
+.quick-link-btn:hover {
+  background: var(--accent);
+  transform: scale(1.05);
 } 
