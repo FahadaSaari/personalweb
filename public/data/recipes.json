@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Spaghetti Carbonara",
+    "cuisine": "Italian",
+    "image": "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta",
+      "2 large eggs",
+      "50g pecorino cheese",
+      "50g parmesan",
+      "Black pepper",
+      "Salt"
+    ],
+    "steps": [
+      "Boil the spaghetti in salted water.",
+      "Fry the pancetta until crisp.",
+      "Beat the eggs and mix with cheese.",
+      "Drain spaghetti and mix with pancetta.",
+      "Remove from heat, add egg and cheese mixture, stir quickly.",
+      "Season with pepper and serve."
+    ]
+  },
+  {
+    "name": "Chicken Tikka Masala",
+    "cuisine": "Indian",
+    "image": "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg",
+    "ingredients": [
+      "500g chicken breast",
+      "1 cup yogurt",
+      "2 tbsp tikka masala paste",
+      "1 onion",
+      "400g canned tomatoes",
+      "200ml cream",
+      "Spices (cumin, coriander, turmeric)"
+    ],
+    "steps": [
+      "Marinate chicken in yogurt and tikka paste.",
+      "Grill or pan-fry chicken pieces.",
+      "Fry onion and spices, add tomatoes.",
+      "Add chicken and cream, simmer.",
+      "Serve with rice or naan."
+    ]
+  },
+  {
+    "name": "Sushi Rolls",
+    "cuisine": "Japanese",
+    "image": "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg",
+    "ingredients": [
+      "2 cups sushi rice",
+      "4 nori sheets",
+      "100g raw salmon",
+      "1 avocado",
+      "Cucumber",
+      "Soy sauce",
+      "Wasabi"
+    ],
+    "steps": [
+      "Cook and season sushi rice.",
+      "Lay nori on bamboo mat, spread rice.",
+      "Add fillings (salmon, avocado, cucumber).",
+      "Roll tightly and slice.",
+      "Serve with soy sauce and wasabi."
+    ]
+  },
+  {
+    "name": "Nasi Lemak",
+    "cuisine": "Asian",
+    "image": "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&w=600",
+    "ingredients": [
+      "2 cups coconut milk rice",
+      "4 boiled eggs",
+      "100g fried anchovies",
+      "100g roasted peanuts",
+      "Sambal (spicy chili paste)",
+      "Cucumber slices",
+      "Banana leaf (optional)"
+    ],
+    "steps": [
+      "Cook rice with coconut milk and pandan leaves.",
+      "Prepare sambal by frying chili paste with onions and anchovies.",
+      "Arrange rice, sambal, eggs, anchovies, peanuts, and cucumber on a plate.",
+      "Serve on banana leaf for authentic presentation."
+    ]
+  },
+  {
+    "name": "Roti Canai",
+    "cuisine": "Asian",
+    "image": "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&w=600",
+    "ingredients": [
+      "2 cups all-purpose flour",
+      "1/2 cup water",
+      "1/4 cup condensed milk",
+      "2 tbsp ghee or butter",
+      "1 tsp salt",
+      "Vegetable oil for frying"
+    ],
+    "steps": [
+      "Mix flour, water, condensed milk, ghee, and salt to form a dough.",
+      "Knead until smooth, then let rest for 2 hours.",
+      "Divide dough, stretch and fold into thin rounds.",
+      "Fry on a hot griddle with oil until golden and crispy.",
+      "Serve with dhal or curry."
+    ]
+  },
+  {
+    "name": "Laksa",
+    "cuisine": "Asian",
+    "image": "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&w=600",
+    "ingredients": [
+      "200g rice noodles",
+      "200g fish fillet (mackerel preferred)",
+      "2 tbsp laksa paste",
+      "400ml coconut milk",
+      "2 boiled eggs",
+      "Bean sprouts",
+      "Fresh mint",
+      "Lime wedges"
+    ],
+    "steps": [
+      "Boil fish, flake the flesh, and set aside.",
+      "Cook laksa paste in a pot, add coconut milk and bring to simmer.",
+      "Add fish, noodles, and toppings (eggs, sprouts, mint, lime).",
+      "Serve hot."
+    ]
+  },
+  {
+    "name": "Satay",
+    "cuisine": "Asian",
+    "image": "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg?auto=compress&w=600",
+    "ingredients": [
+      "500g chicken or beef, cut into cubes",
+      "2 tbsp satay spice mix",
+      "1/2 cup coconut milk",
+      "Bamboo skewers",
+      "Peanut sauce",
+      "Cucumber and onion slices"
+    ],
+    "steps": [
+      "Marinate meat with satay spice and coconut milk for 2 hours.",
+      "Thread meat onto skewers.",
+      "Grill over charcoal until cooked and slightly charred.",
+      "Serve with peanut sauce, cucumber, and onion."
+    ]
+  }
+] 

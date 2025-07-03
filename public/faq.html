@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Support Center</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .faq-section { max-width: 700px; margin: 3rem auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 24px 0 rgba(33,150,243,0.08); padding: 2rem; }
+    .faq-search { width: 100%; padding: 0.7em 1em; border-radius: 10px; border: 1px solid #e0d6e0; font-size: 1rem; margin-bottom: 2rem; }
+    .faq-list { margin: 0; padding: 0; }
+    .faq-item { margin-bottom: 1.2rem; }
+    .faq-question { background: #e3f2fd; color: #2196f3; font-weight: 600; border-radius: 10px; padding: 1rem; cursor: pointer; transition: background 0.2s; }
+    .faq-question:hover { background: #bbdefb; }
+    .faq-answer { display: none; background: #f4f7fa; color: #223046; border-radius: 0 0 10px 10px; padding: 1rem; border-top: 1px solid #e0d6e0; }
+    .faq-item.active .faq-answer { display: block; animation: fadeIn 0.4s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="submit.html">Submit a Ticket</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <section class="hero" id="faq-hero">
+    <h1>Frequently Asked Questions</h1>
+    <div class="subtitle">Find answers to common questions or search our knowledge base.</div>
+  </section>
+  <section class="faq-section">
+    <input type="text" id="faq-search" class="faq-search" placeholder="Search for a question...">
+    <div class="faq-list" id="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">How do I submit a support ticket?</div>
+        <div class="faq-answer">Go to the 'Submit a Ticket' page, fill out the form, and click submit. Our team will respond as soon as possible.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How can I check the status of my enquiry?</div>
+        <div class="faq-answer">You will receive an email update, or you can contact us directly via the Contact page with your ticket ID.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can I attach files to my support request?</div>
+        <div class="faq-answer">Yes, you can upload files (screenshots, documents) when submitting a ticket.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What is the response time for support?</div>
+        <div class="faq-answer">We aim to respond to all enquiries within 24 hours, Monday to Friday.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do I contact support directly?</div>
+        <div class="faq-answer">Use the Contact page to send us a message or start a live chat during business hours.</div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div>© 2024 Support Center. All rights reserved.</div>
+  </footer>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', function() {
+        const item = this.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+    // FAQ search
+    document.getElementById('faq-search').addEventListener('input', function() {
+      const val = this.value.toLowerCase();
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const q = item.querySelector('.faq-question').textContent.toLowerCase();
+        const a = item.querySelector('.faq-answer').textContent.toLowerCase();
+        if (q.includes(val) || a.includes(val)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html> 
