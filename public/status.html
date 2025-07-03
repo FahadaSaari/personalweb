@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Status | Support Center</title>
+  <link rel="stylesheet" href="../src/css/main.css">
+  <style>
+    .status-section { max-width: 600px; margin: 3rem auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 24px 0 rgba(33,150,243,0.08); padding: 2rem; }
+    .status-form .form-group { margin-bottom: 1.2rem; }
+    .status-form label { font-weight: 600; color: var(--primary); display: block; margin-bottom: 0.3rem; }
+    .status-form input { width: 100%; padding: 0.7em 1em; border-radius: 10px; border: 1px solid #e0d6e0; font-size: 1rem; }
+    .status-form .submit-btn { background: var(--primary); color: #fff; border: none; border-radius: 24px; padding: 0.7em 2em; font-weight: 600; font-size: 1rem; margin-top: 1rem; cursor: pointer; transition: background 0.2s; }
+    .status-form .submit-btn:hover { background: var(--accent); }
+    .ticket-info { background: #e3f2fd; color: var(--primary); border-radius: 10px; padding: 1rem; margin-top: 2rem; font-weight: 500; display: none; }
+    .ticket-error { color: var(--warning); font-weight: 600; margin-top: 1rem; display: none; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="submit.html">Submit a Ticket</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="status.html">Ticket Status</a>
+  </nav>
+  <section class="hero" id="status-hero">
+    <h1>Check Ticket Status</h1>
+    <div class="subtitle">Enter your email and ticket ID to view the status of your enquiry.</div>
+  </section>
+  <section class="status-section">
+    <form id="status-form" class="status-form">
+      <div class="form-group">
+        <label for="status-email">Email</label>
+        <input type="email" id="status-email" name="status-email" required>
+      </div>
+      <div class="form-group">
+        <label for="status-id">Ticket ID</label>
+        <input type="text" id="status-id" name="status-id" required>
+      </div>
+      <button type="submit" class="submit-btn">Check Status</button>
+      <div id="ticket-error" class="ticket-error">Ticket not found. Please check your details.</div>
+    </form>
+    <div id="ticket-info" class="ticket-info"></div>
+  </section>
+  <footer>
+    <div>© 2024 Support Center. All rights reserved.</div>
+  </footer>
+  <script>
+    // Demo: Fake ticket data
+    const demoTickets = [
+      { id: 'ABC123', email: 'user@example.com', status: 'Open', subject: 'Cannot login', lastUpdate: '2024-06-01', message: 'We are investigating your issue.' },
+      { id: 'XYZ789', email: 'jane@doe.com', status: 'Closed', subject: 'Billing question', lastUpdate: '2024-05-28', message: 'Your billing issue has been resolved.' }
+    ];
+    document.getElementById('status-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('status-email').value.trim().toLowerCase();
+      const id = document.getElementById('status-id').value.trim().toUpperCase();
+      const ticket = demoTickets.find(t => t.id === id && t.email === email);
+      const info = document.getElementById('ticket-info');
+      const error = document.getElementById('ticket-error');
+      if (ticket) {
+        info.innerHTML = `<b>Status:</b> ${ticket.status}<br><b>Subject:</b> ${ticket.subject}<br><b>Last Update:</b> ${ticket.lastUpdate}<br><b>Message:</b> ${ticket.message}`;
+        info.style.display = 'block';
+        error.style.display = 'none';
+      } else {
+        info.style.display = 'none';
+        error.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html> 
