@@ -46,21 +46,26 @@
   <footer>
     <div>© 2024 Support Center. All rights reserved.</div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    // Demo: Fake ticket data
-    const demoTickets = [
-      { id: 'ABC123', email: 'user@example.com', status: 'Open', subject: 'Cannot login', lastUpdate: '2024-06-01', message: 'We are investigating your issue.' },
-      { id: 'XYZ789', email: 'jane@doe.com', status: 'Closed', subject: 'Billing question', lastUpdate: '2024-05-28', message: 'Your billing issue has been resolved.' }
-    ];
-    document.getElementById('status-form').addEventListener('submit', function(e) {
+    const SUPABASE_URL = 'https://waduvfzgoaslskbnztie.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZHV2Znpnb2FzbHNrYm56dGllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0MjcxOTcsImV4cCI6MjA2NzAwMzE5N30.fBPaM2pNKnIo3KaOVgGiMhoYexs_i7ctVF2X2QGrk-c';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    document.getElementById('status-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const email = document.getElementById('status-email').value.trim().toLowerCase();
-      const id = document.getElementById('status-id').value.trim().toUpperCase();
-      const ticket = demoTickets.find(t => t.id === id && t.email === email);
+      const id = document.getElementById('status-id').value.trim();
       const info = document.getElementById('ticket-info');
       const error = document.getElementById('ticket-error');
-      if (ticket) {
-        info.innerHTML = `<b>Status:</b> ${ticket.status}<br><b>Subject:</b> ${ticket.subject}<br><b>Last Update:</b> ${ticket.lastUpdate}<br><b>Message:</b> ${ticket.message}`;
+      // Query Supabase for ticket
+      const { data, error: fetchError } = await supabase
+        .from('tickets')
+        .select('*')
+        .eq('email', email)
+        .eq('id', id)
+        .single();
+      if (data) {
+        info.innerHTML = `<b>Status:</b> ${data.status || 'Open'}<br><b>Subject:</b> ${data.subject}<br><b>Last Update:</b> ${data.updated_at || data.created_at}<br><b>Message:</b> ${data.description}`;
         info.style.display = 'block';
         error.style.display = 'none';
       } else {

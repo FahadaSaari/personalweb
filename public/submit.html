@@ -64,14 +64,34 @@
   <footer>
     <div>© 2024 Support Center. All rights reserved.</div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    document.getElementById('ticket-form').addEventListener('submit', function(e) {
+    const SUPABASE_URL = 'https://waduvfzgoaslskbnztie.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZHV2Znpnb2FzbHNrYm56dGllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0MjcxOTcsImV4cCI6MjA2NzAwMzE5N30.fBPaM2pNKnIo3KaOVgGiMhoYexs_i7ctVF2X2QGrk-c';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    document.getElementById('ticket-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      document.getElementById('ticket-success').style.display = 'block';
-      this.reset();
-      setTimeout(() => {
-        document.getElementById('ticket-success').style.display = 'none';
-      }, 4000);
+      const form = e.target;
+      const ticket = {
+        name: form.name.value,
+        email: form.email.value,
+        category: form.category.value,
+        subject: form.subject.value,
+        description: form.description.value,
+        urgency: form.urgency.value,
+        created_at: new Date().toISOString()
+      };
+      // Optional: handle file upload separately if needed
+      const { data, error } = await supabase.from('tickets').insert([ticket]);
+      if (!error) {
+        document.getElementById('ticket-success').style.display = 'block';
+        form.reset();
+        setTimeout(() => {
+          document.getElementById('ticket-success').style.display = 'none';
+        }, 4000);
+      } else {
+        alert('There was an error submitting your ticket. Please try again.');
+      }
     });
   </script>
 </body>
